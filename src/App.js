@@ -1,10 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import dhbwLogo from './assets/dhbwCoolersvg.svg'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+
+      <header className="App-header">
+        <h1> DHBW Chat App </h1>
+        <img src={dhbwLogo} className="App-logo" alt="logo" />
+      </header>
+
+      {/*
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,6 +26,7 @@ function App() {
           Learn React
         </a>
       </header>
+      */}
     </div>
   );
 }
