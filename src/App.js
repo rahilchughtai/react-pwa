@@ -23,7 +23,7 @@ function App() {
       </header>
 
       <main>
-        {user ? 'User is signed in :)' : <SignIn />}
+        {user ? <h2>User has signed in :)</h2> : <SignIn />}
       </main>
     </div>
   );

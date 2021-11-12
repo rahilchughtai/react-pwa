@@ -2,6 +2,9 @@ h1 {
   text-align: center;
 }
 
+main {
+  text-align: center;
+}
 .App-header {
   display: flex;
   flex-direction: row;
