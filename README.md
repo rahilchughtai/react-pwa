@@ -2,12 +2,12 @@
 
 
 Installing dependencies
-npm i
+`npm i`
 
 
 Starting dev server
-npm start
+`npm start`
 
 
 Build for deployment
-npm run build
+`npm run build`
