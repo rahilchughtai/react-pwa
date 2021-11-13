@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import './App.css';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -21,7 +21,6 @@ function App() {
 
       <main>
         {isUserSignedIn ? <ChatRoom /> : <SignIn />}
-
         {console.log("signed in variable", isUserSignedIn)}
       </main>
     </div>

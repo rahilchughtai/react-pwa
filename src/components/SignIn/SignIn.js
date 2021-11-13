@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../../firebase';
-
+import './SignIn.css'
+import GoogleButton from 'react-google-button'
 
 export const SignIn = () => {
 
@@ -12,8 +13,12 @@ export const SignIn = () => {
     }
 
     return (
-        <div>
-            <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
+        <div className="SignIn">
+            <div>
+                <button className="button-64" onClick={signInWithGoogle} >
+                    <span class="text">Sign in with Google</span>
+                </button>
+            </div>
         </div>
     )
 }
