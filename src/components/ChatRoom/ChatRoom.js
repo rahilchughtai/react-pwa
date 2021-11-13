@@ -31,7 +31,11 @@ export const ChatRoom = () => {
     return (
         <div>
             <main>
-                {messages && messages.map(msg => <ChatMessage key={msg.id} msgText={msg.text} />)}
+                {messages && messages.map(msg => <ChatMessage
+                    key={msg.id}
+                    msgData={msg}
+
+                />)}
                 <span ref={emptyElem}></span>
             </main>
 
