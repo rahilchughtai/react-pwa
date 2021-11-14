@@ -7,7 +7,7 @@ import { auth } from './firebase';
 import { SignIn } from './components/SignIn/SignIn';
 import { ChatRoom } from './components/ChatRoom/ChatRoom';
 import { AppHeader } from './components/AppHeader/AppHeader';
-
+import { Button, BtnSpan } from './styledComponents/btnStyles'
 
 
 function App() {
@@ -18,7 +18,6 @@ function App() {
   return (
     <div className="App">
       <AppHeader userSignedIn={isUserSignedIn} />
-
       <main>
         {isUserSignedIn ? <ChatRoom /> : <SignIn />}
         {console.log("signed in variable", isUserSignedIn)}

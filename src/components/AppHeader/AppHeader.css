@@ -7,6 +7,7 @@
 }
 .App-header > h1 {
   margin-left: 0.5em;
+  font-size: 1.8em;
 }
 
 .App-logo {
@@ -15,11 +16,9 @@
   pointer-events: none;
 }
 
-.sign-out {
+.App-header > Button {
   position: absolute;
   right: 10px;
-  color: white;
-  padding: 1em 0.5em;
-  background-color: teal;
-  border: 2px white solid;
+}
+.sign-out {
 }
