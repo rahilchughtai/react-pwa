@@ -1,8 +1,6 @@
 .SignIn {
   display: flex;
   justify-content: center;
+
 }
 
-.btn-sign-in{
-  margin-top: 20rem;
-}

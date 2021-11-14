@@ -1,0 +1,42 @@
+p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.Message {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #affaff);
+  align-self: flex-end;
+}
+.received p {
+  background-image: linear-gradient(
+    144deg,
+    rgb(255, 255, 255),
+    #d2d5ff 50%,
+    #effeff
+  );
+  color: rgb(0, 0, 0);
+}
+
+.Message img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2px 5px;
+}

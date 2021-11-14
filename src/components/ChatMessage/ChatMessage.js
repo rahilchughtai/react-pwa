@@ -1,14 +1,14 @@
-import React from 'react'
 import { auth } from '../../firebase'
+import './ChatMessage.css'
 
 
 export const ChatMessage = (props) => {
-    const { createdAt, text, photoURL, uid } = props.msgData
+    const {  text, photoURL, uid } = props.msgData
     const getMessageClass = (uid === auth.currentUser.uid) ? 'sent' : 'received'
 
     return (
         <div className={`Message ${getMessageClass}`}>
-            <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+            <img alt="profile" src={photoURL || 'https://picsum.photos/900/900'} />
             <p>
                 {text}
             </p>

@@ -4,7 +4,8 @@ import { FireDb } from '../../firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ChatMessage } from '../ChatMessage/ChatMessage'
 import { auth } from '../../firebase'
-
+import './ChatRoom.css'
+import { IoSendSharp } from 'react-icons/io5'
 
 export const ChatRoom = () => {
     const messagesReference = collection(FireDb, 'messages')
@@ -29,7 +30,7 @@ export const ChatRoom = () => {
     }
 
     return (
-        <div>
+        <div className="ChatRoom">
             <main>
                 {messages && messages.map(msg => <ChatMessage
                     key={msg.id}
@@ -38,10 +39,14 @@ export const ChatRoom = () => {
                 />)}
                 <span ref={emptyElem}></span>
             </main>
-
             <form onSubmit={sendUserMessage} >
                 <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type your message..." />
-                <button type="submit">Send</button>
+
+                <button disabled={formValue === ''} type="submit">
+                    <span>
+                        <IoSendSharp />
+                    </span>
+                </button>
             </form>
         </div>
     )
