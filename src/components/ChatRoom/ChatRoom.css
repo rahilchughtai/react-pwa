@@ -54,7 +54,7 @@ input {
   padding: 3px 20px;
 }
 
-button {
+.send-button {
   border: none;
   padding: 15px 32px;
   text-align: center;
@@ -69,11 +69,30 @@ button {
   font-size: 2.1rem;
 }
 
-button:disabled {
+.send-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-form button {
+form .send-button {
   width: 20%;
 }
+
+.cameraUpload {
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: white;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  font-size: 2.1rem;
+}
+
+

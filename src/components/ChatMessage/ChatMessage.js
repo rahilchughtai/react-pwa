@@ -3,7 +3,7 @@ import './ChatMessage.css'
 
 
 export const ChatMessage = (props) => {
-    const {  text, photoURL, uid } = props.msgData
+    const { text, photoURL, uid } = props.msgData
     const getMessageClass = (uid === auth.currentUser.uid) ? 'sent' : 'received'
 
     return (

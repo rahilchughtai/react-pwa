@@ -8,12 +8,16 @@ import './ChatRoom.css'
 import { IoSendSharp } from 'react-icons/io5'
 import { IoCamera } from 'react-icons/io5'
 
+import { ChatMenuButton } from '../ChatMenuButton/ChatMenuButton'
+
+
 export const ChatRoom = () => {
     let messagesReference = collection(FireDb, 'messages')
     let msgQuery = query(messagesReference, orderBy('createdAt', 'desc'), limit(20))
     const [messages] = useCollectionData(msgQuery, { idField: 'id' })
     const [formValue, setFormValue] = useState('')
     const emptyElem = useRef()
+
 
 
     const sendUserMessage = async (e) => {
@@ -41,13 +45,17 @@ export const ChatRoom = () => {
                 <span ref={emptyElem}></span>
             </main>
             <form >
-                <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type your message..." />
 
-                <button onClick={sendUserMessage} disabled={formValue === ''} type="submit">
+                <ChatMenuButton className="ChatMenu" />
+
+                <input maxLength="100" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type your message..." />
+
+                <button className="send-button" onClick={sendUserMessage} disabled={formValue === ''} type="submit">
                     <span>
                         <IoSendSharp />
                     </span>
                 </button>
+
 
                 {/*
 
@@ -59,7 +67,6 @@ export const ChatRoom = () => {
 
                 <input style={{ display: 'none' }} id="upload-button" className="camera" accept="image/*" type="file" capture="environment" />
 */}
-
             </form>
         </div>
     )
