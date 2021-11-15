@@ -1,9 +1,9 @@
-button {
-  background-color: black;
+.btn-menu {
+  background-image: linear-gradient(144deg, #000000, #201a4b 50%, #0f3133);
   color: white;
   border: 0;
-  width: 12%;
+  width: 15%;
   padding: 0.2em;
-  font-size: 35px;
+  font-size: 40px;
 }
 
