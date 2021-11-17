@@ -46,7 +46,7 @@ export const ChatRoom = () => {
             </main>
             <form >
 
-                <ChatMenuButton className="ChatMenu" />
+                <ChatMenuButton setFormValue={formValue => { setFormValue(formValue) }} className="ChatMenu" />
 
                 <input maxLength="100" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type your message..." />
 

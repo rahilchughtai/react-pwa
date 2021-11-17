@@ -7,16 +7,38 @@ import './ChatMenuButton.css'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AiFillCamera } from 'react-icons/ai'
 import { IoLocationSharp } from 'react-icons/io5'
+import { useGeolocation } from 'react-use';
 
-export const ChatMenuButton = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+export const ChatMenuButton = (props) => {
+    const [anchorEl, setAnchorEl] = React.useState(null)
+    const location = useGeolocation();
+    const open = Boolean(anchorEl)
+    const GOOGLE_API_KEY = "AIzaSyD5n-f3RcSs0LFdqmvCVew49019Lt2c0m8"
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+
+    const locationToAddress = async () => {
+        const { latitude: lat, longitude: long } = location
+        const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${GOOGLE_API_KEY}`)
+        const resjson = await res.json()
+        const resp = resjson.results[0].formatted_address
+        return `My Location: ${resp}`
+    }
+
+    const handleClose = (key) => {
         setAnchorEl(null);
+        if (key === 'location') {
+            locationToAddress().then(
+                data => {
+                    props.setFormValue((value) => value + data)
+                }
+            )
+
+        }
+
+
     };
 
 
@@ -53,7 +75,7 @@ export const ChatMenuButton = () => {
                     }}
                 >
                     <MenuItem className="menu-item" onClick={handleClose}>Attach Image <AiFillCamera />   </MenuItem>
-                    <MenuItem className="menu-item" onClick={handleClose}> Send Location <IoLocationSharp />  </MenuItem>
+                    <MenuItem className="menu-item" onClick={() => handleClose('location')}> Send Location <IoLocationSharp />  </MenuItem>
 
                 </Menu>
             </ThemeProvider>
