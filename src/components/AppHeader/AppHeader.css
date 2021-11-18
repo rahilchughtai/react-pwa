@@ -16,6 +16,11 @@
   font-size: 1.8em;
 }
 
+.Battery {
+  position: absolute;
+  right: 15%;
+}
+
 .App-logo {
   margin-top: 1em;
   height: 10vmin;
