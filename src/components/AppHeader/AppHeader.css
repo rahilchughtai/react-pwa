@@ -16,7 +16,7 @@
   font-size: 1.8em;
 }
 
-.Battery {
+.App-battery {
   position: absolute;
   right: 15%;
 }
