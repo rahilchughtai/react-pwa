@@ -1,4 +1,4 @@
-import useMenu, { DarkTheme } from "../../util-hooks/utils";
+import useMenu, { DarkTheme } from "../../utils/utils";
 
 import { BtnMin } from '../../styledComponents/btnStyles'
 import { FiUser } from 'react-icons/fi'

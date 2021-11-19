@@ -1,6 +1,6 @@
 import './ChatMenuButton.css'
 
-import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../util-hooks/utils.js'
+import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../utils/utils.js'
 
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { IoLocationSharp } from 'react-icons/io5'
