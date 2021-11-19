@@ -1,6 +1,5 @@
-import { useBattery } from 'react-use';
 import { Battery } from '@pxblue/react-progress-icons';
-
+import { useBattery } from 'react-use';
 
 export const AppBatteryDisplay = () => {
     const batteryState = useBattery();

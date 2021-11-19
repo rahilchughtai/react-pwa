@@ -1,15 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { collection, query, addDoc, orderBy, limit, serverTimestamp } from '@firebase/firestore'
-import { FireDb } from '../../firebase'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { ChatMessage } from '../ChatMessage/ChatMessage'
-import { auth } from '../../firebase'
 import './ChatRoom.css'
-import { IoSendSharp } from 'react-icons/io5'
-import { IoCamera } from 'react-icons/io5'
+
+import React, { useEffect, useRef, useState } from 'react'
+import { addDoc, collection, limit, orderBy, query, serverTimestamp } from '@firebase/firestore'
 
 import { ChatMenuButton } from '../ChatMenuButton/ChatMenuButton'
-
+import { ChatMessage } from '../ChatMessage/ChatMessage'
+import { FireDb } from '../../firebase'
+import { IoCamera } from 'react-icons/io5'
+import { IoSendSharp } from 'react-icons/io5'
+import { auth } from '../../firebase'
+import debounce from "lodash/debounce";
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 export const ChatRoom = () => {
     let messagesReference = collection(FireDb, 'messages')
@@ -21,7 +22,6 @@ export const ChatRoom = () => {
 
 
     const sendUserMessage = async (e) => {
-
         e.preventDefault();
         const { uid, photoURL } = auth.currentUser;
         const messageObj = {
@@ -43,30 +43,16 @@ export const ChatRoom = () => {
                     msgData={msg}
                 />)}
                 <span ref={emptyElem}></span>
+
             </main>
             <form >
-
                 <ChatMenuButton setFormValue={formValue => { setFormValue(formValue) }} className="ChatMenu" />
-
                 <input maxLength="100" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type your message..." />
-
                 <button className="send-button" onClick={sendUserMessage} disabled={formValue === ''} type="submit">
                     <span>
                         <IoSendSharp />
                     </span>
                 </button>
-
-
-                {/*
-
-                <button className="cameraUpload" htmlFor={'upload-button'}>
-                    <span>
-                        <IoCamera />
-                    </span>
-                </button>
-
-                <input style={{ display: 'none' }} id="upload-button" className="camera" accept="image/*" type="file" capture="environment" />
-*/}
             </form>
         </div>
     )

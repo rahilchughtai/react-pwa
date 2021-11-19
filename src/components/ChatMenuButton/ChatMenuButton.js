@@ -1,23 +1,21 @@
-import React from 'react'
+import './ChatMenuButton.css'
+
+import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../util-hooks/utils.js'
+
+import { AiFillCamera } from 'react-icons/ai'
+import { BiDotsVerticalRounded } from 'react-icons/bi'
+import { IoLocationSharp } from 'react-icons/io5'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { IoSendSharp } from 'react-icons/io5'
-import { BiDotsVerticalRounded } from 'react-icons/bi'
-import './ChatMenuButton.css'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AiFillCamera } from 'react-icons/ai'
-import { IoLocationSharp } from 'react-icons/io5'
+import React from 'react'
+import { ThemeProvider } from '@mui/material/styles';
 import { useGeolocation } from 'react-use';
 
 export const ChatMenuButton = (props) => {
-    const [anchorEl, setAnchorEl] = React.useState(null)
+    const { anchorEl, open, handleClick, handleClose } = useMenu()
     const location = useGeolocation();
-    const open = Boolean(anchorEl)
-    const GOOGLE_API_KEY = "AIzaSyD5n-f3RcSs0LFdqmvCVew49019Lt2c0m8"
+    const theme = DarkTheme
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
 
     const locationToAddress = async () => {
         const { latitude: lat, longitude: long } = location
@@ -27,27 +25,14 @@ export const ChatMenuButton = (props) => {
         return `My Location: ${resp}`
     }
 
-    const handleClose = (key) => {
-        setAnchorEl(null);
-        if (key === 'location') {
-            locationToAddress().then(
-                data => {
-                    props.setFormValue((value) => value + data)
-                }
-            )
-
-        }
-
-
-    };
-
-
-    const theme = createTheme({
-        palette: {
-            mode: 'dark'
-        },
-    })
-
+    const handleLocationButton = () => {
+        handleClose()
+        locationToAddress().then(
+            data => {
+                props.setFormValue((value) => value + data)
+            }
+        )
+    }
 
     return (
         <>
@@ -74,12 +59,9 @@ export const ChatMenuButton = (props) => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem className="menu-item" onClick={handleClose}>Attach Image <AiFillCamera />   </MenuItem>
-                    <MenuItem className="menu-item" onClick={() => handleClose('location')}> Send Location <IoLocationSharp />  </MenuItem>
-
+                    <MenuItem className="menu-item" onClick={handleLocationButton}> Send Location <IoLocationSharp />  </MenuItem>
                 </Menu>
             </ThemeProvider>
-
         </>
     )
 }
