@@ -1,6 +1,5 @@
 import './ChatMessage.css'
 
-import { IoCamera } from 'react-icons/io5'
 import { MdModeEditOutline } from 'react-icons/md'
 import { auth } from '../../firebase'
 import { useState } from 'react'

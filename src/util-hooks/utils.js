@@ -4,24 +4,11 @@ import { createTheme } from '@mui/material/styles';
 export default function useMenu(resetInterval = null) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl)
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-
-    };
-
-    const handleClose = (key) => {
-        setAnchorEl(null);
-    };
-
-    const theme = createTheme({
-        palette: {
-            mode: 'dark'
-        },
-    })
-
+    const handleClick = (event) => setAnchorEl(event.currentTarget);
+    const handleClose = () => setAnchorEl(null);
     return { anchorEl, open, handleClose, handleClick };
 }
+
 
 export const DarkTheme = createTheme({
     palette: {

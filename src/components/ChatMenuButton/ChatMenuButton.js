@@ -2,7 +2,6 @@ import './ChatMenuButton.css'
 
 import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../util-hooks/utils.js'
 
-import { AiFillCamera } from 'react-icons/ai'
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { IoLocationSharp } from 'react-icons/io5'
 import Menu from '@mui/material/Menu';

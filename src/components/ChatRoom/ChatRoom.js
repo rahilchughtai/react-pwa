@@ -1,15 +1,13 @@
 import './ChatRoom.css'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { addDoc, collection, limit, orderBy, query, serverTimestamp } from '@firebase/firestore'
 
 import { ChatMenuButton } from '../ChatMenuButton/ChatMenuButton'
 import { ChatMessage } from '../ChatMessage/ChatMessage'
 import { FireDb } from '../../firebase'
-import { IoCamera } from 'react-icons/io5'
 import { IoSendSharp } from 'react-icons/io5'
 import { auth } from '../../firebase'
-import debounce from "lodash/debounce";
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 export const ChatRoom = () => {
