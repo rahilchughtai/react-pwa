@@ -1,13 +1,13 @@
-import React from 'react';
 import './App.css';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from './firebase';
-import { SignIn } from './components/SignIn/SignIn';
-import { ChatRoom } from './components/ChatRoom/ChatRoom';
-import { AppHeader } from './components/AppHeader/AppHeader';
 
+import { AppHeader } from './components/AppHeader/AppHeader';
+import { ChatRoom } from './components/ChatRoom/ChatRoom';
+import React from 'react';
+import { SignIn } from './components/AppSignIn/SignIn';
+import { auth } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 function App() {
   const [user] = useAuthState(auth)
