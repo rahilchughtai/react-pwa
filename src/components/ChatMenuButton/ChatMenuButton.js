@@ -1,9 +1,9 @@
 import './ChatMenuButton.css'
 
+import { IoCameraSharp, IoLocationSharp, IoMicSharp } from 'react-icons/io5'
 import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../utils/utils.js'
 
 import { BiDotsVerticalRounded } from 'react-icons/bi'
-import { IoLocationSharp } from 'react-icons/io5'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react'
@@ -11,7 +11,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { useGeolocation } from 'react-use';
 
 export const ChatMenuButton = (props) => {
-    const { anchorEl, open, handleClick, handleClose } = useMenu()
+    const { anchorEl, menuOpen, handleMenuClick, handleMenuClose } = useMenu()
     const location = useGeolocation();
     const theme = DarkTheme
 
@@ -25,7 +25,7 @@ export const ChatMenuButton = (props) => {
     }
 
     const handleLocationButton = () => {
-        handleClose()
+        handleMenuClose()
         locationToAddress().then(
             data => {
                 props.setFormValue((value) => value + data)
@@ -40,8 +40,8 @@ export const ChatMenuButton = (props) => {
                 id="basic-button"
                 aria-controls="basic-menu"
                 aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
+                aria-expanded={menuOpen ? 'true' : undefined}
+                onClick={handleMenuClick}
             >
                 <span>
                     <BiDotsVerticalRounded />
@@ -52,13 +52,15 @@ export const ChatMenuButton = (props) => {
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
+                    open={menuOpen}
+                    onClose={handleMenuClose}
                     MenuListProps={{
                         'aria-labelledby': 'basic-button',
                     }}
                 >
                     <MenuItem className="menu-item" onClick={handleLocationButton}> Send Location <IoLocationSharp />  </MenuItem>
+                    <MenuItem disabled className="menu-item" > Send Image  <IoCameraSharp />  </MenuItem>
+                    <MenuItem disabled className="menu-item"> Send Voice Message  <IoMicSharp /></MenuItem>
                 </Menu>
             </ThemeProvider>
         </>

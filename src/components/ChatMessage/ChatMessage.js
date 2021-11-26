@@ -1,6 +1,7 @@
 import './ChatMessage.css'
 
 import { MdModeEditOutline } from 'react-icons/md'
+import Tooltip from '@mui/material/Tooltip';
 import { auth } from '../../firebase'
 import { useState } from 'react'
 
@@ -15,7 +16,10 @@ export const ChatMessage = (props) => {
     return (
 
         <div onMouseLeave={() => seteditVisible(false)} onMouseEnter={() => seteditVisible(true)} className={`Message ${getMessageClass}`}>
-            <img alt="profile" src={photoURL || 'https://picsum.photos/900/900'} />
+            <Tooltip title={auth.currentUser.displayName}>
+                <img alt="profile" src={photoURL || 'https://picsum.photos/900/900'} />
+            </Tooltip>
+
             <p>
                 {text}
             </p>

@@ -1,12 +1,32 @@
 import React from "react";
 import { createTheme } from '@mui/material/styles';
 
+//react mui menu hook
 export default function useMenu(resetInterval = null) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl)
-    const handleClick = (event) => setAnchorEl(event.currentTarget);
-    const handleClose = () => setAnchorEl(null);
-    return { anchorEl, open, handleClose, handleClick };
+    const menuOpen = Boolean(anchorEl)
+    const handleMenuClick = (event) => setAnchorEl(event.currentTarget);
+    const handleMenuClose = () => setAnchorEl(null);
+    return { anchorEl, menuOpen, handleMenuClose, handleMenuClick };
+}
+
+export function useModal(reset = false) {
+    const [modalOpen, setModalOpen] = React.useState(false)
+    const handleModalOpen = () => setModalOpen(true)
+    const handleModalClose = () => setModalOpen(false)
+    const modalStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '60vw',
+        maxWidth:400,
+        bgcolor: 'black',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+    return { modalOpen, handleModalOpen, handleModalClose, modalStyle }
 }
 
 
