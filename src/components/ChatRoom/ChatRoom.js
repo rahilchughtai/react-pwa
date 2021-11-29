@@ -21,10 +21,11 @@ export const ChatRoom = () => {
 
     const sendUserMessage = async (e) => {
         e.preventDefault();
-        const { uid, photoURL } = auth.currentUser;
+        const { uid, photoURL, displayName } = auth.currentUser;
         const messageObj = {
             text: formValue,
             createdAt: serverTimestamp(),
+            displayName,
             uid,
             photoURL
         }
