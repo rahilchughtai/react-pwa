@@ -1,7 +1,9 @@
 import './ChatRoom.css'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { addDoc, collection, limit, orderBy, query, serverTimestamp } from '@firebase/firestore'
+import { addDoc, collection, orderBy, query, serverTimestamp } from '@firebase/firestore'
+
+import { usePageVisibility } from 'react-page-visibility';
 
 import { ChatMenuButton } from '../ChatMenuButton/ChatMenuButton'
 import { ChatMessage } from '../ChatMessage/ChatMessage'
@@ -18,6 +20,8 @@ export const ChatRoom = () => {
     const [formValue, setFormValue] = useState('')
     const emptyElem = useRef()
 
+    const isPageVisible = usePageVisibility();
+
     useEffect(
         () => {
             if (Notification.permission !== "granted")
@@ -26,7 +30,7 @@ export const ChatRoom = () => {
             if (!messages)
                 return;
 
-            if (!!oldMessagesLength && oldMessagesLength !== messages.length)
+            if (!isPageVisible && !!oldMessagesLength && oldMessagesLength !== messages.length)
             {
                 const newMessages = [...messages]
                     .reverse()
