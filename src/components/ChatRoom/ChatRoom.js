@@ -1,6 +1,6 @@
 import './ChatRoom.css'
 
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { addDoc, collection, limit, orderBy, query, serverTimestamp } from '@firebase/firestore'
 
 import { ChatMenuButton } from '../ChatMenuButton/ChatMenuButton'
@@ -12,12 +12,36 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 export const ChatRoom = () => {
     let messagesReference = collection(FireDb, 'messages')
-    let msgQuery = query(messagesReference, orderBy('createdAt', 'desc'), limit(20))
+    let msgQuery = query(messagesReference, orderBy('createdAt', 'desc'))
     const [messages] = useCollectionData(msgQuery, { idField: 'id' })
+    const [oldMessagesLength, setOldMessagesLength] = useState(0);
     const [formValue, setFormValue] = useState('')
     const emptyElem = useRef()
 
+    useEffect(
+        () => {
+            if (Notification.permission !== "granted")
+                return;
 
+            if (!messages)
+                return;
+
+            if (!!oldMessagesLength && oldMessagesLength !== messages.length)
+            {
+                const newMessages = [...messages]
+                    .reverse()
+                    .slice(oldMessagesLength)
+                    .filter(x => x.displayName === auth.currentUser.displayName);
+
+                for (const newMessage of newMessages) {
+                    new Notification(newMessage.displayName, { icon: newMessage.photoURL, body: newMessage.text });
+                }                
+            }
+
+            setOldMessagesLength(messages.length);
+        },
+        [messages]
+    );
 
     const sendUserMessage = async (e) => {
         e.preventDefault();
