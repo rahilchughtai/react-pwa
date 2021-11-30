@@ -35,7 +35,7 @@ export const ChatRoom = () => {
                 const newMessages = [...messages]
                     .reverse()
                     .slice(oldMessagesLength)
-                    .filter(x => x.displayName === auth.currentUser.displayName);
+                    .filter(x => x.displayName !== auth.currentUser.displayName);
 
                 for (const newMessage of newMessages) {
                     new Notification(newMessage.displayName, { icon: newMessage.photoURL, body: newMessage.text });
