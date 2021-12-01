@@ -52,7 +52,10 @@ export const ChatMenuButton = (props) => {
         fileReader.readAsDataURL(image);
 
         fileReader.onload = () => {
-            props.sendCustomValue(`data:${image.type};${fileReader.result}`);
+            if (!fileReader.result.startsWith("data:image"))
+                return;
+
+            props.sendCustomValue(fileReader.result);
         };
     };
 
