@@ -12,5 +12,4 @@ Build for deployment
 `npm run build`
 
 Deploy to firebase
-
 `firebase deploy`
