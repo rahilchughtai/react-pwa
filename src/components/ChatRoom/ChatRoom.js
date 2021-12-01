@@ -13,12 +13,12 @@ import { auth } from '../../firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 export const ChatRoom = () => {
-    let messagesReference = collection(FireDb, 'messages')
-    let msgQuery = query(messagesReference, orderBy('createdAt', 'desc'))
-    const [messages] = useCollectionData(msgQuery, { idField: 'id' })
+    let messagesReference = collection(FireDb, 'messages');
+    let msgQuery = query(messagesReference, orderBy('createdAt', 'asc'));
+    const [messages] = useCollectionData(msgQuery, { idField: 'id' });
     const [oldMessagesLength, setOldMessagesLength] = useState(0);
-    const [formValue, setFormValue] = useState('')
-    const emptyElem = useRef()
+    const [formValue, setFormValue] = useState('');
+    const emptyElem = useRef();
 
     const isPageVisible = usePageVisibility();
 
@@ -32,10 +32,9 @@ export const ChatRoom = () => {
 
             if (!isPageVisible && !!oldMessagesLength && oldMessagesLength !== messages.length)
             {
-                const newMessages = [...messages]
-                    .reverse()
+                const newMessages = messages
                     .slice(oldMessagesLength)
-                    .filter(x => x.displayName !== auth.currentUser.displayName);
+                    .filter(x => x.uid !== auth.currentUser.uid);
 
                 for (const newMessage of newMessages) {
                     new Notification(newMessage.displayName, { icon: newMessage.photoURL, body: newMessage.text });
@@ -65,12 +64,10 @@ export const ChatRoom = () => {
     return (
         <div className="ChatRoom">
             <main>
-                {messages && messages.slice(0).reverse().map(msg => <ChatMessage
-                    key={msg.id}
-                    msgData={msg}
-                />)}
+                {messages && messages
+                        .slice(Math.max(messages.length - 20, 0))
+                        .map(msg => <ChatMessage key={msg.id} msgData={msg} />)}
                 <span ref={emptyElem}></span>
-
             </main>
             <form >
                 <ChatMenuButton setFormValue={formValue => { setFormValue(formValue) }} className="ChatMenu" />
