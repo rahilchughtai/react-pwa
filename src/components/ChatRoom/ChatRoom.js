@@ -34,7 +34,7 @@ export const ChatRoom = () => {
             {
                 const newMessages = messages
                     .slice(oldMessagesLength)
-                    .filter(x => x.uid !== auth.currentUser.uid);
+                    .filter(x => x.uid !== auth.currentUser.uid && !x.value.startsWith("data:image"));
 
                 for (const newMessage of newMessages) {
                     new Notification(newMessage.displayName, { icon: newMessage.photoURL, body: newMessage.text });
@@ -46,18 +46,23 @@ export const ChatRoom = () => {
         [messages]
     );
 
-    const sendUserMessage = async (e) => {
-        e.preventDefault();
+    const sendUserMessage = async (e, customValue) => {
+        if (!!e)
+            e.preventDefault();
+
         const { uid, photoURL, displayName } = auth.currentUser;
         const messageObj = {
-            text: formValue,
+            value: customValue ?? formValue,
             createdAt: serverTimestamp(),
             displayName,
             uid,
             photoURL
         }
         await addDoc(messagesReference, messageObj)
-        setFormValue('')
+
+        if (!customValue)
+            setFormValue('')
+
         emptyElem.current.scrollIntoView({ behavior: 'smooth' })
     }
 
@@ -70,7 +75,7 @@ export const ChatRoom = () => {
                 <span ref={emptyElem}></span>
             </main>
             <form >
-                <ChatMenuButton setFormValue={formValue => { setFormValue(formValue) }} className="ChatMenu" />
+                <ChatMenuButton sendCustomValue={value => sendUserMessage(null, value)} setFormValue={formValue => { setFormValue(formValue) }} className="ChatMenu" />
                 <input maxLength="100" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type your message..." />
                 <button className="send-button" onClick={sendUserMessage} disabled={formValue === ''} type="submit">
                     <span>

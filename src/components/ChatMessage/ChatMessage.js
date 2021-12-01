@@ -6,7 +6,7 @@ import { auth } from '../../firebase'
 import { useState } from 'react'
 
 export const ChatMessage = (props) => {
-    const { text, photoURL, uid, displayName } = props.msgData
+    const { value, photoURL, uid, displayName } = props.msgData
     const msgFromCurrUser = (uid === auth.currentUser.uid)
     const getMessageClass = msgFromCurrUser ? 'sent' : 'received'
     const [editVisible, seteditVisible] = useState(false)
@@ -20,9 +20,9 @@ export const ChatMessage = (props) => {
                 <img alt="profile" src={photoURL || 'https://picsum.photos/900/900'} />
             </Tooltip>
 
-            <p>
-                {text}
-            </p>
+            {!value.startsWith("data:image")
+                ? <p>{value}</p>
+                : <img style={{ width: '50%', height: '90%', borderRadius: 20 }} src={value}  />}
             {msgEditable && <MdModeEditOutline className="edit-icon" />}
         </div>
 

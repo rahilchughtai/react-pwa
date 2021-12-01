@@ -6,15 +6,16 @@ import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../utils/utils.js'
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import React from 'react'
+import React, { useRef } from 'react'
 import { ThemeProvider } from '@mui/material/styles';
 import { useGeolocation } from 'react-use';
 
 export const ChatMenuButton = (props) => {
     const { anchorEl, menuOpen, handleMenuClick, handleMenuClose } = useMenu()
     const location = useGeolocation();
-    const theme = DarkTheme
+    const theme = DarkTheme;
 
+    const imageInput = useRef();
 
     const locationToAddress = async () => {
         const { latitude: lat, longitude: long } = location
@@ -32,6 +33,28 @@ export const ChatMenuButton = (props) => {
             }
         )
     }
+
+    const sendImage = async () => {
+        handleMenuClose();
+
+        if (!imageInput.current.files || !imageInput.current.files.length)
+            return;
+
+        const image = imageInput.current.files[0];
+
+        if (image.size > 1000000) {
+            console.log("File is too big for the firestore!");
+            return;
+        }
+
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(image);
+
+        fileReader.onload = () => {
+            props.sendCustomValue(`data:${image.type};${fileReader.result}`);
+        };
+    };
 
     return (
         <>
@@ -56,10 +79,20 @@ export const ChatMenuButton = (props) => {
                     onClose={handleMenuClose}
                     MenuListProps={{
                         'aria-labelledby': 'basic-button',
-                    }}
-                >
-                    <MenuItem className="menu-item" onClick={handleLocationButton}> Send Location <IoLocationSharp />  </MenuItem>
-                    <MenuItem disabled className="menu-item" > Send Image  <IoCameraSharp />  </MenuItem>
+                    }}>
+
+                    <MenuItem className="menu-item" onClick={handleLocationButton}> Send Location <IoLocationSharp /></MenuItem>
+                    
+                    <MenuItem component="label" className="menu-item">
+                        Send Image  <IoCameraSharp />
+                        <input
+                            ref={imageInput}
+                            style={{ visibility: "hidden" }}
+                            onChange={sendImage}
+                            type="file"
+                            accept="image/x-png,image/jpeg,image/gif" />
+                    </MenuItem>
+
                     <MenuItem disabled className="menu-item"> Send Voice Message  <IoMicSharp /></MenuItem>
                 </Menu>
             </ThemeProvider>
