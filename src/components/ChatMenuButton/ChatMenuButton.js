@@ -1,12 +1,12 @@
 import './ChatMenuButton.css'
 
 import { IoCameraSharp, IoLocationSharp, IoMicSharp } from 'react-icons/io5'
+import React, { useRef } from 'react'
 import useMenu, { DarkTheme, GOOGLE_API_KEY } from '../../utils/utils.js'
 
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import React, { useRef } from 'react'
 import { ThemeProvider } from '@mui/material/styles';
 import { useGeolocation } from 'react-use';
 
@@ -85,7 +85,7 @@ export const ChatMenuButton = (props) => {
                     }}>
 
                     <MenuItem className="menu-item" onClick={handleLocationButton}> Send Location <IoLocationSharp /></MenuItem>
-                    
+
                     <MenuItem component="label" className="menu-item">
                         Send Image  <IoCameraSharp />
                         <input
@@ -95,8 +95,6 @@ export const ChatMenuButton = (props) => {
                             type="file"
                             accept="image/x-png,image/jpeg,image/gif" />
                     </MenuItem>
-
-                    <MenuItem disabled className="menu-item"> Send Voice Message  <IoMicSharp /></MenuItem>
                 </Menu>
             </ThemeProvider>
         </>

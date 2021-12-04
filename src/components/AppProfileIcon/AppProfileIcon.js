@@ -68,7 +68,6 @@ export const AppProfileIcon = () => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem className="menu-item" onClick={handleMenuClose}> Change Profile Picture <AiFillPicture /> </MenuItem>
                     <MenuItem className="menu-item" onClick={handleNameClick}> Change Display name <MdDriveFileRenameOutline /> </MenuItem>
                 </Menu>
             </ThemeProvider>
