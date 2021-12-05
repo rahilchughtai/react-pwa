@@ -9,10 +9,13 @@ export const AppBatteryDisplay = () => {
     return (
         <div className="App-battery" hidden={!isSupported} >
             <div >
-                <Battery color={'teal'} percent={percent} size={26} charging={charging} outlined={false} />
+                <Battery color={'teal'}
+                    percent={percent}
+                    size={26}
+                    charging={charging}
+                    outlined={false} />
             </div>
             {percent}%
         </div>
-
     )
 }

@@ -1,15 +1,20 @@
-
-import React from 'react';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from '../../firebase';
 import './SignIn.css'
+
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 import { Button } from '../../styledComponents/btnStyles';
+import React from 'react';
+import { auth } from '../../firebase';
 
 export const SignIn = () => {
 
     const signInWithGoogle = () => {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
+        signInWithPopup(auth, provider).catch((error) => {
+            const { code, message } = error
+            document.write(message)
+            console.log(code, message)
+        });
     }
 
     return (

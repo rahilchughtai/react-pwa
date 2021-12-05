@@ -13,17 +13,19 @@ import { useGeolocation } from 'react-use';
 export const ChatMenuButton = (props) => {
     const { anchorEl, menuOpen, handleMenuClick, handleMenuClose } = useMenu()
     const location = useGeolocation();
-    const theme = DarkTheme;
+    const API_PATH = "https://maps.googleapis.com/maps/api/geocode"
 
+    const theme = DarkTheme;
     const imageInput = useRef();
 
     const locationToAddress = async () => {
         const { latitude: lat, longitude: long } = location
-        const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${GOOGLE_API_KEY}`)
+        const res = await fetch(`${API_PATH}/json?latlng=${lat},${long}&key=${GOOGLE_API_KEY}`)
         const resjson = await res.json()
-        const resp = resjson.results[0].formatted_address
-        return `My Location: ${resp}`
+        const response = resjson.results[0].formatted_address
+        return `My Location: ${response}`
     }
+
 
     const handleLocationButton = () => {
         handleMenuClose()
