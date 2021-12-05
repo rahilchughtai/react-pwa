@@ -34,10 +34,11 @@ export const ChatRoom = () => {
             {
                 const newMessages = messages
                     .slice(oldMessagesLength)
-                    .filter(x => x.uid !== auth.currentUser.uid && !x.value.startsWith("data:image"));
+                    .filter(x => x.uid !== auth.currentUser.uid)
+                    .map(x => ({...x, value: x.value.startsWith("data:image") ? "Bild" : x.value}));
 
                 for (const newMessage of newMessages) {
-                    new Notification(newMessage.displayName, { icon: newMessage.photoURL, body: newMessage.text });
+                    new Notification(newMessage.displayName, { icon: newMessage.photoURL, body: newMessage.value });
                 }                
             }
 
