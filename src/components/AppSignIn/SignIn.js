@@ -1,6 +1,6 @@
 import './SignIn.css'
 
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
 
 import { Button } from '../../styledComponents/btnStyles';
 import React from 'react';
@@ -10,7 +10,7 @@ export const SignIn = () => {
 
     const signInWithGoogle = () => {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).catch((error) => {
+        signInWithRedirect(auth, provider).catch((error) => {
             const { code, message } = error
             document.write(message)
             console.log(code, message)
