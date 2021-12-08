@@ -10,7 +10,7 @@ export const ChatMessage = (props) => {
 
     return (
 
-        <div onMouseLeave={() => seteditVisible(false)} onMouseEnter={() => seteditVisible(true)} className={`Message ${getMessageClass}`}>
+        <div className={`Message ${getMessageClass}`}>
             <Tooltip title={displayName}>
                 <img alt="profile" src={photoURL || 'https://picsum.photos/900/900'} />
             </Tooltip>
