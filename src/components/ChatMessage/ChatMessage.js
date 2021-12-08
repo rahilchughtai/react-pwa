@@ -1,17 +1,12 @@
 import './ChatMessage.css'
 
-import { MdModeEditOutline } from 'react-icons/md'
 import Tooltip from '@mui/material/Tooltip';
 import { auth } from '../../firebase'
-import { useState } from 'react'
 
 export const ChatMessage = (props) => {
     const { value, photoURL, uid, displayName } = props.msgData
     const msgFromCurrUser = (uid === auth.currentUser.uid)
     const getMessageClass = msgFromCurrUser ? 'sent' : 'received'
-    const [editVisible, seteditVisible] = useState(false)
-    const msgEditable = editVisible && msgFromCurrUser
-
 
     return (
 
@@ -22,8 +17,8 @@ export const ChatMessage = (props) => {
 
             {!value.startsWith("data:image")
                 ? <p>{value}</p>
-                : <img style={{ width: '50%', height: '90%', borderRadius: 20 }} src={value}  />}
-            {msgEditable && <MdModeEditOutline className="edit-icon" />}
+                : <img style={{ width: '50%', height: '90%', borderRadius: 20 }} src={value} />}
+
         </div>
 
     )
