@@ -36,4 +36,4 @@ export const DarkTheme = createTheme({
     },
 })
 
-export const GOOGLE_API_KEY = "AIzaSyD5n-f3RcSs0LFdqmvCVew49019Lt2c0m8"
+export const GOOGLE_API_KEY = ""
